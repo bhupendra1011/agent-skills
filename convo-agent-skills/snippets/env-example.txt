@@ -1,0 +1,50 @@
+# Copy to .env and fill in your values.
+# Required: the four Agora variables below (then npm run dev will work).
+# Optional: AI agent vars (LLM, TTS, ASR, Avatar) — fill only what you use.
+
+# --- Agora (get from Agora Console) ---
+NEXT_PUBLIC_AGORA_APP_ID=""
+AGORA_APP_CERTIFICATE=""
+AGORA_CUSTOMER_ID=""
+AGORA_CUSTOMER_SECRET=""
+
+# --- LLM ---
+NEXT_PUBLIC_LLM_VENDOR="openai"
+NEXT_PUBLIC_LLM_URL="https://api.openai.com/v1/chat/completions"
+NEXT_PUBLIC_LLM_MODEL="gpt-4o-mini"
+LLM_API_KEY=""
+
+# --- TTS ---
+NEXT_PUBLIC_TTS_VENDOR="elevenlabs"
+# ElevenLabs
+NEXT_PUBLIC_ELEVENLABS_VOICE_ID=""
+NEXT_PUBLIC_ELEVENLABS_MODEL_ID="eleven_flash_v2_5"
+NEXT_PUBLIC_ELEVENLABS_SAMPLE_RATE="24000"
+ELEVENLABS_API_KEY=""
+# Microsoft
+NEXT_PUBLIC_MICROSOFT_TTS_REGION="eastus"
+NEXT_PUBLIC_MICROSOFT_TTS_VOICE="en-US-AndrewMultilingualNeural"
+MICROSOFT_TTS_KEY=""
+# OpenAI TTS
+NEXT_PUBLIC_OPENAI_TTS_MODEL="tts-1"
+NEXT_PUBLIC_OPENAI_TTS_VOICE="alloy"
+OPENAI_TTS_KEY=""
+
+# --- ASR ---
+NEXT_PUBLIC_ASR_VENDOR="ares"
+NEXT_PUBLIC_ASR_LANGUAGE="en-US"
+# Deepgram (optional)
+DEEPGRAM_API_KEY=""
+# Microsoft ASR (optional)
+MICROSOFT_ASR_KEY=""
+
+# --- Avatars (optional) ---
+# HeyGen
+HEYGEN_API_KEY=""
+NEXT_PUBLIC_HEYGEN_AVATAR_ID=""
+# Akool
+AKOOL_API_KEY=""
+NEXT_PUBLIC_AKOOL_AVATAR_ID=""
+# Anam
+ANAM_API_KEY=""
+NEXT_PUBLIC_ANAM_AVATAR_ID=""
