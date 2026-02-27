@@ -1,6 +1,6 @@
 ---
-<!-- @version 1.1.0 -->
 name: convo-agent-skills
+version: 1.1.0
 description: >
   Build real-time conversational AI applications using Agora SDKs and Next.js.
   Covers voice agents, video agents, AI agent lifecycle, live transcript/subtitles,
