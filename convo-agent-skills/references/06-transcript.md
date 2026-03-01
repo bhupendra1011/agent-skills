@@ -227,6 +227,8 @@ const TranscriptSidePanel: React.FC = () => {
 ## Chat Input Component
 
 ```tsx
+import { Send } from "lucide-react";
+
 const ChatInput: React.FC = () => {
   const [message, setMessage] = useState("");
   const { sendChatMessage } = useAgora();
@@ -249,10 +251,7 @@ const ChatInput: React.FC = () => {
         className="flex-1 bg-gray-800 text-white rounded px-3 py-2 text-sm"
       />
       <button onClick={handleSend} disabled={!isAgentActive || !message.trim()}>
-        {/* Send icon (rotated -90deg for rightward arrow) */}
-        <svg className="w-5 h-5 text-cyan-400 transform -rotate-90" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-        </svg>
+        <Send className="w-5 h-5 text-cyan-400" />
       </button>
     </div>
   );

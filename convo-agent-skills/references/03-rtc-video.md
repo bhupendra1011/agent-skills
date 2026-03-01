@@ -84,21 +84,31 @@ const toggleLocalVideo = async () => {
 
 ## Camera Icons
 
-Use proper camera SVG icons (NOT generic image/mountains icons):
+Use `lucide-react` icons (installed in `00-core-setup`):
 
 ```tsx
-{videoMuted ? (
-  // Camera OFF icon (with slash)
-  <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M3.27 2L2 3.27 4.73 6H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.21 0 .39-.08.54-.18L19.73 21 21 19.73M21 6.5l-4 4V7c0-.55-.45-1-1-1H9.82l12 12 .18-.18V6.5z" />
-  </svg>
-) : (
-  // Camera ON icon
-  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-  </svg>
-)}
+import { Video, VideoOff } from "lucide-react";
+
+{videoMuted
+  ? <VideoOff className="w-5 h-5 text-red-400" />
+  : <Video className="w-5 h-5 text-white" />}
 ```
+
+**Common lucide-react icon mapping for controls:**
+
+| Control | Lucide Component |
+|---------|-----------------|
+| Mic unmuted | `<Mic className="w-5 h-5 text-white" />` |
+| Mic muted | `<MicOff className="w-5 h-5 text-red-400" />` |
+| Camera on | `<Video className="w-5 h-5 text-white" />` |
+| Camera off | `<VideoOff className="w-5 h-5 text-red-400" />` |
+| End call | `<PhoneOff className="w-5 h-5 text-white" />` |
+| Settings | `<Settings className="w-5 h-5 text-white" />` |
+| Agent/bot | `<Bot className="w-5 h-5" />` |
+| Loading | `<Loader2 className="w-5 h-5 animate-spin" />` |
+| Send message | `<Send className="w-5 h-5 text-cyan-400" />` |
+| Close/dismiss | `<X className="w-5 h-5" />` |
+| User avatar | `<User className="w-5 h-5" />` |
 
 ## Subscribe to Remote Video
 
@@ -136,10 +146,13 @@ Grid layout for multiple participants:
 }`}>
   {/* Local video */}
   <VideoTile videoTrack={localVideoTrack} uid={localUID} />
-  {/* Remote videos */}
-  {remoteUsers.map(user => user.videoTrack && (
-    <VideoTile key={user.uid} videoTrack={user.videoTrack} uid={String(user.uid)} />
-  ))}
+  {/* Remote videos — filter out agent UIDs to prevent extra tiles */}
+  {remoteUsers
+    .filter(u => String(u.uid) !== agentRtcUid && String(u.uid) !== agentAvatarRtcUid)
+    .filter(user => user.videoTrack)
+    .map(user => (
+      <VideoTile key={user.uid} videoTrack={user.videoTrack!} uid={String(user.uid)} />
+    ))}
 </div>
 ```
 

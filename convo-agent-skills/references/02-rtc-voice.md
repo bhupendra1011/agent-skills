@@ -137,6 +137,20 @@ const filterAgentFromRemoteUsers = (agentUid: string) => {
 
 Call this immediately after `store.setAgentActive(agentId, agentRtcUid)`.
 
+### JSX Safety Filter (Required)
+
+As a defense-in-depth measure, **always** filter agent UIDs in JSX when rendering remote users. This catches the race condition where the agent publishes before the invite API returns:
+
+```tsx
+{remoteUsers
+  .filter(u => String(u.uid) !== agentRtcUid && String(u.uid) !== agentAvatarRtcUid)
+  .map(user => (
+    <VideoTile key={user.uid} videoTrack={user.videoTrack ?? null} uid={String(user.uid)} />
+  ))}
+```
+
+This is a **required** secondary filter — do not rely solely on `handleUserPublished` filtering.
+
 ## Microphone Device Selection
 
 Users should be able to choose their microphone. Add device selection:

@@ -37,13 +37,15 @@ Copy `snippets/env-example.txt` to `.env`. The four Agora vars are required; eve
 ```bash
 npx create-next-app@latest my-convo-app --ts --tailwind --app --src-dir
 cd my-convo-app
-npm install agora-rtc-sdk-ng agora-rtm-sdk agora-token zustand
+npm install agora-rtc-sdk-ng agora-rtm-sdk agora-token zustand lucide-react
 ```
 
 ## Recommended Folder Structure
 
+> **Note**: Since the scaffold uses `--src-dir`, all `app/` paths below are under `src/app/`.
+
 ```
-app/
+src/app/
   api/
     generate-agora-token/route.ts    # Token endpoint
     agent/
@@ -53,6 +55,8 @@ app/
       query/route.ts                 # Query agent status
   page.tsx                           # Landing page
   call/page.tsx                      # Call screen
+public/
+  agora-logo.svg                     # Agora brand logo for landing page
 src/
   api/
     agoraApi.ts                      # APP_ID export, base config
@@ -89,3 +93,5 @@ Implement in this order so dependencies are available:
 - `npm run dev` starts without errors
 - `.env` has at minimum the 4 Agora vars filled in
 - `curl http://localhost:3000/api/generate-agora-token` returns `{ token, uid, channel }`
+- Landing page uses `public/agora-logo.svg` for "Powered by Agora" branding (not plain text)
+- All icons use `lucide-react` (e.g., `<Mic />`, `<Video />`, `<PhoneOff />`) — no inline SVGs

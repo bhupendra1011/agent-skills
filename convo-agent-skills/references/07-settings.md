@@ -79,6 +79,46 @@ const ASR_PRESETS = [
 ];
 ```
 
+## Settings Modal Layout
+
+Ensure the settings modal has adequate padding and overflow handling to prevent label clipping:
+
+```tsx
+import { X } from "lucide-react";
+
+{/* Settings modal wrapper */}
+<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+  <div className="bg-gray-900 border border-gray-700 rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden">
+    {/* Header with close button */}
+    <div className="flex items-center justify-between p-4 border-b border-gray-700">
+      <h2 className="text-lg font-semibold text-white">Settings</h2>
+      <button onClick={onClose}><X className="w-5 h-5 text-gray-400" /></button>
+    </div>
+
+    {/* Tab bar — overflow-x-auto prevents tab labels from clipping on narrow viewports */}
+    <div className="flex border-b border-gray-700 overflow-x-auto">
+      {tabs.map(tab => (
+        <button key={tab} className="px-4 py-2 text-sm whitespace-nowrap ...">{tab}</button>
+      ))}
+    </div>
+
+    {/* Content area — p-6 ensures labels are not clipped on left edge */}
+    <div className="flex-1 overflow-y-auto p-6 space-y-4">
+      {/* Tab content */}
+    </div>
+  </div>
+</div>
+```
+
+**Toggle rows** — use `min-w-0` on labels and `flex-shrink-0` on toggles to prevent label collapse:
+
+```tsx
+<div className="flex items-center justify-between">
+  <label className="text-sm text-gray-300 min-w-0">Enable Avatar</label>
+  <button className="flex-shrink-0 w-10 h-6 rounded-full ..." />
+</div>
+```
+
 ## Settings UI Pattern
 
 Tabbed sidebar with sections. **Recommended tab structure**: Voice, LLM, TTS, ASR, Avatar, Advanced.
