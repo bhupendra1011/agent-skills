@@ -1,4 +1,4 @@
-// @version 1.1.0
+// @version 1.2.0
 // app/api/agent/invite/route.ts
 // Invites an AI agent to the channel via Agora Conversational AI API v2.
 // Client calls POST /api/agent/invite with { channelName, uid, agentSettings, username }.
@@ -9,8 +9,6 @@ import { RtcTokenBuilder, RtcRole } from "agora-token";
 
 const APP_ID = process.env.NEXT_PUBLIC_AGORA_APP_ID!;
 const APP_CERTIFICATE = process.env.AGORA_APP_CERTIFICATE!;
-const CUSTOMER_ID = process.env.AGORA_CUSTOMER_ID!;
-const CUSTOMER_SECRET = process.env.AGORA_CUSTOMER_SECRET!;
 
 // Helper: Get key from client or fallback to server .env
 const getKey = (clientKey: string | undefined, serverEnvKey: string): string => {
@@ -116,8 +114,8 @@ export async function POST(request: NextRequest) {
     if (!channelName || !uid) {
       return NextResponse.json({ error: "channelName and uid are required" }, { status: 400 });
     }
-    if (!APP_CERTIFICATE || !CUSTOMER_ID || !CUSTOMER_SECRET) {
-      return NextResponse.json({ error: "Server missing Agora credentials" }, { status: 500 });
+    if (!APP_CERTIFICATE) {
+      return NextResponse.json({ error: "Server missing AGORA_APP_CERTIFICATE" }, { status: 500 });
     }
 
     const { llm, tts, asr, advanced_features, parameters, avatar } = agentSettings;
@@ -272,7 +270,6 @@ export async function POST(request: NextRequest) {
     }
 
     // --- Call Agora API ---
-    const authHeader = Buffer.from(`${CUSTOMER_ID}:${CUSTOMER_SECRET}`).toString("base64");
     const apiUrl = `https://api.agora.io/api/conversational-ai-agent/v2/projects/${APP_ID}/join`;
     const uniqueAgentName = generateAgentName(agentSettings.name || "agent");
     const requestBody = { name: uniqueAgentName, properties: propertiesPayload };
@@ -285,7 +282,7 @@ export async function POST(request: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${authHeader}`,
+        Authorization: `agora token=${agentRtcToken}`,
       },
       body: JSON.stringify(requestBody),
     });

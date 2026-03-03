@@ -9,18 +9,17 @@
 3. Get credentials:
    - **App ID** → `NEXT_PUBLIC_AGORA_APP_ID`
    - **App Certificate** → `AGORA_APP_CERTIFICATE`
-   - **Customer ID** and **Customer Secret** (RESTful API section) → `AGORA_CUSTOMER_ID`, `AGORA_CUSTOMER_SECRET`
+
+> **Note on Customer ID/Secret**: Not required. The app authenticates to the Agora Conversational AI API using RTC token auth (`Authorization: agora token=...`). Customer ID/Secret (RESTful API section) are only needed if you explicitly want Basic Auth — leave them out of `.env` unless needed.
 
 ## Environment Variables
 
-Copy `snippets/env-example.txt` to `.env`. The four Agora vars are required; everything else is optional.
+Copy `snippets/env-example.txt` to `.env`. Only the two Agora vars are required; everything else is optional.
 
 | Variable | Required for | Where to get |
 |----------|-------------|--------------|
 | `NEXT_PUBLIC_AGORA_APP_ID` | Everything | Console → Project → App ID |
 | `AGORA_APP_CERTIFICATE` | Token generation | Console → Project → App Certificate |
-| `AGORA_CUSTOMER_ID` | Agent API auth | Console → RESTful API |
-| `AGORA_CUSTOMER_SECRET` | Agent API auth | Console → RESTful API |
 | `LLM_API_KEY` | AI agent (LLM) | Your LLM provider |
 | `ELEVENLABS_API_KEY` | TTS (ElevenLabs) | elevenlabs.io |
 | `MICROSOFT_TTS_KEY` | TTS (Microsoft) | Azure portal |
@@ -91,7 +90,7 @@ Implement in this order so dependencies are available:
 ## Verification
 
 - `npm run dev` starts without errors
-- `.env` has at minimum the 4 Agora vars filled in
+- `.env` has at minimum `NEXT_PUBLIC_AGORA_APP_ID` and `AGORA_APP_CERTIFICATE` filled in
 - `curl http://localhost:3000/api/generate-agora-token` returns `{ token, uid, channel }`
 - Landing page uses `public/agora-logo.svg` for "Powered by Agora" branding (not plain text)
 - All icons use `lucide-react` (e.g., `<Mic />`, `<Video />`, `<PhoneOff />`) — no inline SVGs

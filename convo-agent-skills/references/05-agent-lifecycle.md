@@ -1,5 +1,5 @@
 # 05 — Agent Lifecycle
-<!-- @version 1.1.0 -->
+<!-- @version 1.2.0 -->
 
 Invite, update, stop, and query an AI agent via the Agora Conversational AI API v2.
 
@@ -12,8 +12,8 @@ Client → Your API route → Agora Conversational AI API → Agent joins channe
 The client never calls Agora directly. Your server:
 1. Receives agent settings from client
 2. Injects API keys from env (server key injection pattern)
-3. Generates agent token
-4. Calls Agora API with Basic Auth (Customer ID:Secret)
+3. Generates agent RTC token
+4. Calls Agora API using RTC token auth (`Authorization: agora token=<token>`)
 
 ## Agora API Endpoints
 
@@ -24,7 +24,9 @@ The client never calls Agora directly. Your server:
 | Update | POST | `https://api.agora.io/api/conversational-ai-agent/v2/projects/{APP_ID}/agents/{agentId}/update` |
 | Query | GET | `https://api.agora.io/api/conversational-ai-agent/v2/projects/{APP_ID}/agents/{agentId}` |
 
-Auth header: `Authorization: Basic ${btoa(CUSTOMER_ID + ":" + CUSTOMER_SECRET)}`
+Auth header: `Authorization: agora token=<agent-rtc-token>`
+
+> **No Customer ID/Secret needed.** The Agora Conversational AI API v2 accepts RTC token auth. Build the token with `RtcTokenBuilder` using `APP_ID` + `APP_CERTIFICATE`, then pass it as the Authorization header. Customer ID/Secret are optional and only needed if you prefer Basic Auth.
 
 ## Minimal Join Payload
 
@@ -99,11 +101,11 @@ export const inviteAgent = async (
   return res.json(); // { agentId, status, agentRtcUid }
 };
 
-export const stopAgent = async (agentId: string) => {
+export const stopAgent = async (agentId: string, token: string) => {
   const res = await fetch("/api/agent/stop", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ agentId }),
+    body: JSON.stringify({ agentId, token }),
   });
   if (!res.ok) throw new Error("Failed to stop agent");
   return res.json();
@@ -134,8 +136,8 @@ store.setAgentLoading(true);
 const { agentId, agentRtcUid } = await inviteAgent(channelId, localUID, agentSettings);
 store.setAgentActive(agentId, agentRtcUid);
 
-// Stop agent
-await stopAgent(store.agentId);
+// Stop agent (pass the user's RTC token for auth)
+await stopAgent(store.agentId, store.agoraToken);
 store.clearAgent();
 ```
 
@@ -192,7 +194,7 @@ const leaveCall = async () => {
       await fetch("/api/agent/stop", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ agentId: store.agentId }),
+        body: JSON.stringify({ agentId: store.agentId, token: store.agoraToken }),
       });
     } catch { /* noop */ }
   }

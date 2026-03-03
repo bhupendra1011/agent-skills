@@ -1,12 +1,16 @@
 # Copy to .env and fill in your values.
-# Required: the four Agora variables below (then npm run dev will work).
+# Required: the two Agora variables below (then npm run dev will work).
 # Optional: AI agent vars (LLM, TTS, ASR, Avatar) — fill only what you use.
 
 # --- Agora (get from Agora Console) ---
 NEXT_PUBLIC_AGORA_APP_ID=""
 AGORA_APP_CERTIFICATE=""
-AGORA_CUSTOMER_ID=""
-AGORA_CUSTOMER_SECRET=""
+
+# Optional: Customer ID/Secret (RESTful API section in Agora Console)
+# Not required — the app authenticates using RTC token auth (agora token=...).
+# Only needed if you explicitly want to use Basic Auth for Agora REST calls.
+# AGORA_CUSTOMER_ID=""
+# AGORA_CUSTOMER_SECRET=""
 
 # --- LLM ---
 NEXT_PUBLIC_LLM_VENDOR="openai"
