@@ -7,13 +7,13 @@ A [Claude Code skill](https://skills.sh) for building real-time conversational A
 ## Install
 
 ```bash
-npx skills add YOUR_USERNAME/convo-agent-skills -g -y
+npx skills add https://github.com/bhupendra1011/agent-skills --skill convo-agent-skills -g -y
 ```
 
 Or install locally in a project:
 
 ```bash
-npx skills add YOUR_USERNAME/convo-agent-skills -y
+npx skills add https://github.com/bhupendra1011/agent-skills --skill convo-agent-skills -y
 ```
 
 ## What It Does

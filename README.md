@@ -13,13 +13,13 @@ A collection of AI agent skills for Claude Code, Cursor, Windsurf, and other cod
 Install a specific skill:
 
 ```bash
-npx skills add https://github.com/bhupendra1011/agent-skills/tree/main/convo-agent-skills
+npx skills add https://github.com/bhupendra1011/agent-skills --skill convo-agent-skills
 ```
 
 Or install globally:
 
 ```bash
-npx skills add https://github.com/bhupendra1011/agent-skills/tree/main/convo-agent-skills -g -y
+npx skills add https://github.com/bhupendra1011/agent-skills --skill convo-agent-skills -g -y
 ```
 
 ## What are Agent Skills?
