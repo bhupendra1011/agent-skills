@@ -39,16 +39,15 @@ Then it loads **only the relevant guides** — not everything at once. A voice-o
 | AI agent invite/stop/update | `05-agent-lifecycle` | Any agent |
 | Live transcript / subtitles | `06-transcript` | When subtitles needed |
 | Settings UI & persistence | `07-settings` | When settings UI needed |
-| Host mute/unmute controls | `08-host-controls` | Multi-user with host |
-| Avatar (HeyGen/Anam/Akool) | `09-avatar` | When avatar needed |
-| MCP, SAL, filler words | `10-advanced` | Advanced features |
+| Avatar (HeyGen/Anam/Akool) | `08-avatar` | When avatar needed |
+| MCP, SAL, filler words | `09-advanced` | Advanced features |
 
 ## Progressive Loading
 
 The skill uses a **router architecture**:
 
 - `SKILL.md` (~100 lines) is always loaded — contains discovery questions, dependency graph, and build order
-- `references/*.md` (11 files) are loaded one-at-a-time via the Read tool as the user progresses
+- `references/*.md` (10 files) are loaded one-at-a-time via the Read tool as the user progresses
 - `snippets/*.ts` (14 files) are copy-paste code extracted from a working production app
 
 ### Loading Paths
@@ -60,7 +59,7 @@ The skill uses a **router architecture**:
 | Text chat with AI | 00 → 01 → 04 → 05 |
 | Full-featured | 00 → 01 → 02 → 03 → 04 → 05 → 06 |
 
-Add features incrementally: `+ transcript` → load 06, `+ avatar` → load 09, etc.
+Add features incrementally: `+ transcript` → load 06, `+ avatar` → load 08, etc.
 
 ## Snippets Included
 

@@ -6,7 +6,7 @@ A collection of AI agent skills for Claude Code, Cursor, Windsurf, and other cod
 
 | Skill | Description | Version |
 |-------|-------------|---------|
-| [convo-agent-skills](./convo-agent-skills/) | Build real-time conversational AI apps with Agora RTC/RTM, Next.js, voice/video agents, transcripts, chat, avatars, and settings UI | v1.1.0 |
+| [convo-agent-skills](./convo-agent-skills/) | Build real-time conversational AI apps with Agora RTC/RTM, Next.js, voice/video agents, transcripts, chat, avatars, and settings UI | v1.3.0 |
 
 ## Installation
 

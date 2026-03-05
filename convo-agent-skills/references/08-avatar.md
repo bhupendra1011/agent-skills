@@ -1,4 +1,4 @@
-# 09 — Avatar Integration
+# 08 — Avatar Integration
 <!-- @version 1.1.0 -->
 
 Add visual AI avatars (HeyGen, Anam, Akool) that lip-sync with agent TTS. Requires `03-rtc-video` + `05-agent-lifecycle`.

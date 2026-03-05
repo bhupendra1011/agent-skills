@@ -1,4 +1,4 @@
-# 10 — Advanced Features
+# 09 — Advanced Features
 
 ## MCP Server Integration
 

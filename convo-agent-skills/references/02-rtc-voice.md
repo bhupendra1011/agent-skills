@@ -94,7 +94,7 @@ const handleUserPublished = async (user, mediaType) => {
     return;
   }
 
-  // 2. Filter avatar UID — handle avatar tracks separately (see 09-avatar)
+  // 2. Filter avatar UID — handle avatar tracks separately (see 08-avatar)
   const avatarUid = getStore.getState().agentAvatarRtcUid;
   if (avatarUid && uid === avatarUid) {
     // Handle avatar video/audio tracks...

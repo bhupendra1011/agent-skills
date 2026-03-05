@@ -206,7 +206,7 @@ export const useAgora = () => {
         return;
       }
 
-      // Filter avatar UID — handle avatar tracks separately (see 09-avatar)
+      // Filter avatar UID — handle avatar tracks separately (see 08-avatar)
       const avatarUid = getStore.getState().agentAvatarRtcUid;
       if (avatarUid && uid === avatarUid) {
         if (mediaType === "video" && user.videoTrack) {

@@ -71,8 +71,6 @@ Application-level messages sent over RTM channel:
 | `user-joined` | Joining user | Announce name + mute state |
 | `user-left` | Leaving user | Notify departure |
 | `media-state-updated` | Any user | Sync mic/camera mute state |
-| `host-mute-request` | Host | Mute target user (see 08-host-controls) |
-| `host-unmute-request` | Host | Request target unmute (see 08-host-controls) |
 
 ## Message Handler
 

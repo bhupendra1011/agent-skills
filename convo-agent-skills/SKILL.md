@@ -1,11 +1,11 @@
 ---
 name: convo-agent-skills
-version: 1.2.0
+version: 1.3.0
 description: >
   Build real-time conversational AI applications using Agora SDKs and Next.js.
   Covers voice agents, video agents, AI agent lifecycle, live transcript/subtitles,
-  RTM messaging/chat, avatar integration (HeyGen/Anam/Akool), host controls,
-  settings persistence, and MCP tool calling. Use alongside next-best-practices skill.
+  RTM messaging/chat, avatar integration (HeyGen/Anam/Akool), settings persistence,
+  and MCP tool calling. User and agent only; no host controls. Use alongside next-best-practices skill.
   Activates when the user wants to build a conversational AI app, voice/video agent,
   real-time communication with Agora, or add AI agent features to a Next.js app.
 ---
@@ -38,7 +38,6 @@ Use AskUserQuestion with these questions:
   - Live transcript / subtitles (Real-time speech-to-text display)
   - Settings UI (LLM, TTS, ASR configuration panel)
   - Avatar (HeyGen, Anam, or Akool avatar integration)
-  - Host controls (Mute/unmute participants)
 
 **Question 3:**
 - question: "Are you building from scratch or adding to an existing project?"
@@ -62,9 +61,8 @@ Based on answers, load ONLY the needed references (one at a time, as user progre
 | Full-featured | 00 → 01 → 02 → 03 → 04 → 05 → 06 |
 | + Transcript/subtitles | add 06 (and 04 if RTM mode) |
 | + Settings UI | add 07 |
-| + Host mute controls | add 08 (requires 04) |
-| + Avatar | add 09 (requires 03 + 05) |
-| + MCP / advanced | add 10 |
+| + Avatar | add 08 (requires 03 + 05) |
+| + MCP / advanced | add 09 |
 
 ## Dependency Graph
 
@@ -77,9 +75,8 @@ Based on answers, load ONLY the needed references (one at a time, as user progre
 05-agent-lifecycle ← requires 01 + (02 or 04)
 06-transcript ← requires 05 + (02 or 04)
 07-settings ← requires 05
-08-host-controls ← requires 04
-09-avatar ← requires 03 + 05
-10-advanced ← requires 05
+08-avatar ← requires 03 + 05
+09-advanced ← requires 05
 ```
 
 ## How to Load
